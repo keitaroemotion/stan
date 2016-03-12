@@ -34,9 +34,7 @@ def unitmap(key):
        1000      :"KB"     
     }[key]
 
-def showRes(t):
-    return "%sG %sM %sK" % (t[0], t[1], t[2]) 
-def b2gb(m, giga=0):
-    return showRes(getValue(m, 1000000000))
+def b2gb(m):
+    return (lambda t: "%sG %sM %sK" % (t[0], t[1], t[2]))(getValue(m, 1000000000))
 
 print b2gb(get_dir_size(get_directory_input()))
