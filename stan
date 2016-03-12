@@ -28,11 +28,16 @@ def puts(arg):
     print(arg)
     return arg
 
-def b2gb(m):
+def b2gb(m, giga=0):
     billion = 1000000000 
-    giga = m/billion 
-    rem  = m % billion
-    mega = rem/1000000
-    return "%sG %sM" % (giga, mega) 
+    if (m > billion):
+       giga = m/billion 
+       rem  = m % billion
+       mega = rem/1000000
+       kilo = rem % 1000000
+    else:
+       mega = m/1000000
+       kilo = m%1000000
+    return "%sG %sM %sK" % (giga, mega, kilo) 
 
 print b2gb(get_dir_size(get_directory_input()))
