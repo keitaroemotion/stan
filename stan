@@ -16,11 +16,12 @@ def get_dir_size_ini(file):
     return [fit(f, get_dir_size("%s/%s" % (file,f))) for f in listdir(file)]
 
 def puts(x):
-    print(x)
+    if x != '':
+        print(x)
     return x
 
 def fit(x, f):
-    return "|%s| %s" % (b2gb(f), x)
+    return f > 1000 and "|%s| %s" % (b2gb(f), x) or ''
 
 def addup(arg):
     return (len(arg) == 0) and [0] or [reduce(lambda x,y:x+y, arg)]
@@ -48,4 +49,4 @@ def b2gb(m):
     return (lambda t: "%sG %sM %sK" % (t[0], t[1], t[2]))(getValue(m, 1000000000))
 
 #print b2gb(get_dir_size(get_directory_input()))
-[puts(x) for x in  get_dir_size_ini(get_directory_input())]
+[puts(x) for x in get_dir_size_ini(get_directory_input())]
