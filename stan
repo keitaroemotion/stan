@@ -24,20 +24,19 @@ def listdir(d):
 def get_directory_input():
     return len(sys.argv) == 1 and "." or sys.argv[1] 
 
-def puts(arg):
-    print(arg)
-    return arg
+def getValue(x, denom, box=()):
+    return denom > 999 and getValue(x%denom,denom/1000, box+(x/denom,)) or box+(x,)
 
+def unitmap(key):
+    return {
+       1000000000:"GB",
+       1000000   :"MB",
+       1000      :"KB"     
+    }[key]
+
+def showRes(t):
+    return "%sG %sM %sK" % (t[0], t[1], t[2]) 
 def b2gb(m, giga=0):
-    billion = 1000000000 
-    if (m > billion):
-       giga = m/billion 
-       rem  = m % billion
-       mega = rem/1000000
-       kilo = rem % 1000000
-    else:
-       mega = m/1000000
-       kilo = m%1000000
-    return "%sG %sM %sK" % (giga, mega, kilo) 
+    return showRes(getValue(m, 1000000000))
 
 print b2gb(get_dir_size(get_directory_input()))
