@@ -20,8 +20,11 @@ def puts(x):
         print(x)
     return x
 
+def color(x):
+    return "\033[92m"+x
+
 def fit(x, f):
-    return f > 1000 and "|%s| %s" % (b2gb(f), x) or ''
+    return f > 1000 and "|%s\033[0m| %s" % (color(x), b2gb(f)) or ''
 
 def addup(arg):
     return (len(arg) == 0) and [0] or [reduce(lambda x,y:x+y, arg)]
@@ -46,7 +49,7 @@ def unitmap(key):
     }[key]
 
 def b2gb(m):
-    return (lambda t: "%sG %sM %sK" % (t[0], t[1], t[2]))(getValue(m, 1000000000))
+    return (lambda t: "%sG %sM %sK" % (t[0], t[1], t[2]))(getValue(m/8, 1000000000))
 
 #print b2gb(get_dir_size(get_directory_input()))
 [puts(x) for x in get_dir_size_ini(get_directory_input())]
